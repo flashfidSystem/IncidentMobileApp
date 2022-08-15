@@ -4,8 +4,7 @@ const assert = require("assert");
 dotenv.config();
 
 const {
-  PORT,
-  HOST,
+  PORT, 
   HOST_URL,
   SQL_USER,
   SQL_PASSWORD,
@@ -19,8 +18,7 @@ assert(PORT, "PORT is required");
 assert(HOST, "HOST is required");
 
 module.exports = {
-  port: PORT,
-  host: HOST,
+  port: PORT, 
   url: HOST_URL,
   sql: {
     server: SQL_SERVER,
