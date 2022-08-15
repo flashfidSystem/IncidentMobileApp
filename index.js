@@ -1,5 +1,4 @@
 const express = require("express");
-const config = require("./config");
 // const cors = require("cors");
 const bodyParser = require("body-parser");
 
@@ -20,17 +19,16 @@ app.use(function (req, res, next) {
 
 var cors = require("cors");
 // app.use(cors);
-app.use(cors({origin: true, credentials: true}));
+app.use(cors({ origin: true, credentials: true }));
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // add this below app.use("/", routes) to make index.html a static file
- 
-// app.route('/')
-//   .get(function (req, res) {
-//     res.sendFile(process.cwd() + '/index.html');
-// });
+
+app.route("/").get(function (req, res) {
+  res.sendFile(process.cwd() + "/index.html");
+});
 
 app.use("/api", incidentRoutes.routes);
 app.use("/api", warningRoutes.routes);
