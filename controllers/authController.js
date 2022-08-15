@@ -16,16 +16,7 @@ const userLogin = async (req, res, next) => {
     if (Mystatus === Success) {
       res.status(200).send(results);
       console.log(Mystatus);
-    } else if (Mystatus === InvalidUser) {
-      res.status(201).send(Mystatus);
-      console.log(Mystatus);
-    } else if (Mystatus === AccountDisabled) {
-      res.status(201).send(Mystatus);
-      console.log(Mystatus);
-    } else if (Mystatus === MaxLogonReached) {
-      res.status(201).send(Mystatus);
-      console.log(Mystatus);
-    } else if (Mystatus === AccountExpiry) {
+    } else {
       res.status(201).send(Mystatus);
       console.log(Mystatus);
     }
