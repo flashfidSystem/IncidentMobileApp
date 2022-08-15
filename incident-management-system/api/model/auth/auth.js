@@ -7,6 +7,7 @@ const userLogin = async (params) => {
     const conn = sql.connect(config.sql);
     let pool = await conn;
     let { UserID, Password } = params;
+    // console.log(params);
     let result = await pool
       .request()
       .input("UserID", sql.VarChar, UserID)
