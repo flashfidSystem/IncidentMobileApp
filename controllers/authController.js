@@ -3,7 +3,7 @@ const authData = require("../model/auth/auth");
 // User login
 const userLogin = async (req, res, next) => {
   try {
-    const params  = req.body;
+    const params = req.body;
     const results = await authData.userLogin(params);
     const Mystatus = results[0][0].Status;
 
@@ -16,8 +16,17 @@ const userLogin = async (req, res, next) => {
     if (Mystatus === Success) {
       res.status(200).send(results);
       console.log(Mystatus);
-    } else {
-      res.status(401).send(Mystatus);
+    } else if (Mystatus === InvalidUser) {
+      res.status(201).send(Mystatus);
+      console.log(Mystatus);
+    } else if (Mystatus === AccountDisabled) {
+      res.status(201).send(Mystatus);
+      console.log(Mystatus);
+    } else if (Mystatus === MaxLogonReached) {
+      res.status(201).send(Mystatus);
+      console.log(Mystatus);
+    } else if (Mystatus === AccountExpiry) {
+      res.status(201).send(Mystatus);
       console.log(Mystatus);
     }
   } catch (error) {
@@ -86,7 +95,7 @@ const userProfileImageUpdate = async (req, res, next) => {
   try {
     const params = { ...req.body };
     const { UserID, Photo, contentType } = params;
-    if (Photo  && contentType && UserID) {
+    if (Photo && contentType && UserID) {
       const results = await authData.userProfileImageUpdate(params);
       res.status(200).send(results);
       console.log(results);
