@@ -5,21 +5,8 @@ const userLogin = async (req, res, next) => {
   try {
     const params = req.body;
     const results = await authData.userLogin(params);
-    const Mystatus = results[0][0].Status;
-
-    const InvalidUser = 0;
-    const Success = 1;
-    const AccountDisabled = 2;
-    const MaxLogonReached = 3;
-    const AccountExpiry = 4;
-
-    if (Mystatus === Success) {
-      res.status(200).send(results);
-      console.log(Mystatus);
-    } else {
-      res.status(201).send(Mystatus);
-      console.log(Mystatus);
-    }
+    res.status(200).send(results);
+    console.log(results);
   } catch (error) {
     res.status(400).send(error.message);
     console.log(error);
