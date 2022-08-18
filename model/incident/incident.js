@@ -11,6 +11,12 @@ const getIncidentById = async (params) => {
     .execute("spIncidentIDGet");
   return result.recordsets;
 };
+const getIncidentCount = async () => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool.request().execute("spIncidentNo");
+  return result.recordsets;
+};
 
 const addIncident = async (params) => {
   const conn = sql.connect(config.sql);
@@ -262,7 +268,6 @@ const removeIncident = async (params) => {
   return result.recordsets;
 };
 
-
 module.exports = {
   getIncidentById,
   addIncident,
@@ -275,5 +280,6 @@ module.exports = {
   changeIncident,
   changeOffence,
   changePerson,
-  removeIncident, 
+  removeIncident,
+  getIncidentCount,
 };
