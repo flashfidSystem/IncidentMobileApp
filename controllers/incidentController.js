@@ -9,6 +9,14 @@ const getIncidentById = async (req, res, next) => {
     res.status(500).json({ status: "Failed", message: error.message });
   }
 };
+const getIncidentCount = async (req, res, next) => {
+  try { 
+    const results = await incidentData.getIncidentCount();
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
 
 const addIncident = async (req, res, next) => {
   try {
@@ -158,4 +166,5 @@ module.exports = {
   changeOffence,
   changePerson,
   removeIncident, 
+  getIncidentCount
 };
