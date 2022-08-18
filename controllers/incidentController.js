@@ -10,8 +10,16 @@ const getIncidentById = async (req, res, next) => {
   }
 };
 const getIncidentCount = async (req, res, next) => {
-  try { 
+  try {
     const results = await incidentData.getIncidentCount();
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
+const getNotification = async (req, res, next) => {
+  try {
+    const results = await incidentData.getNotification();
     res.status(200).json(results);
   } catch (error) {
     res.status(500).json({ status: "Failed", message: error.message });
@@ -152,7 +160,6 @@ const removeIncident = async (req, res, next) => {
   }
 };
 
-
 module.exports = {
   getIncidentById,
   addIncident,
@@ -165,6 +172,7 @@ module.exports = {
   changeDamage,
   changeOffence,
   changePerson,
-  removeIncident, 
-  getIncidentCount
+  removeIncident,
+  getIncidentCount,
+  getNotification
 };

@@ -16,11 +16,13 @@ const {
   changeOffence,
   removeIncident,
   getIncidentCount,
+  getNotification,
 } = incidentController;
 
 // router.get("/incidents", getIncident);
 router.get("/incidents/:IID", getIncidentById);
 router.post("/incidents/count", getIncidentCount);
+router.post("/notifications", getNotification);
 
 router.post("/incidents", addIncident);
 router.post("/offences", addOffence);
