@@ -17,6 +17,12 @@ const getIncidentCount = async () => {
   let result = await pool.request().execute("spIncidentNo");
   return result.recordsets;
 };
+const getNotification = async () => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool.request().execute("spIncidentNotification");
+  return result.recordsets;
+};
 
 const addIncident = async (params) => {
   const conn = sql.connect(config.sql);
@@ -282,4 +288,5 @@ module.exports = {
   changePerson,
   removeIncident,
   getIncidentCount,
+  getNotification
 };
