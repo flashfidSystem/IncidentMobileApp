@@ -11,7 +11,7 @@ const getIncidentById = async (req, res, next) => {
 };
 const getPaymentPaid = async (req, res, next) => {
   try {
-    const Role = req.params.role;
+    const Role = req.body.Role;
     const results = await incidentData.getPaymentPaid(Role);
     res.status(200).json(results);
   } catch (error) {
@@ -20,7 +20,7 @@ const getPaymentPaid = async (req, res, next) => {
 };
 const getPaymentUnpaid = async (req, res, next) => {
   try {
-    const Role = req.params.role;
+    const Role = req.body.Role;
     const results = await incidentData.getPaymentUnpaid(Role);
     res.status(200).json(results);
   } catch (error) {
