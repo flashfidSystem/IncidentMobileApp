@@ -9,6 +9,24 @@ const getIncidentById = async (req, res, next) => {
     res.status(500).json({ status: "Failed", message: error.message });
   }
 };
+const getPaymentPaid = async (req, res, next) => {
+  try {
+    const Role = req.params.role;
+    const results = await incidentData.getPaymentPaid(Role);
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
+const getPaymentUnpaid = async (req, res, next) => {
+  try {
+    const Role = req.params.role;
+    const results = await incidentData.getPaymentUnpaid(Role);
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
 const getIncidentCount = async (req, res, next) => {
   try {
     const results = await incidentData.getIncidentCount();
@@ -174,5 +192,7 @@ module.exports = {
   changePerson,
   removeIncident,
   getIncidentCount,
-  getNotification
+  getNotification,
+  getPaymentPaid,
+  getPaymentUnpaid
 };
