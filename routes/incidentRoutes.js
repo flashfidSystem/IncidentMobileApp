@@ -17,12 +17,17 @@ const {
   removeIncident,
   getIncidentCount,
   getNotification,
+  getPaymentPaid,
+  getPaymentUnpaid,
 } = incidentController;
 
 // router.get("/incidents", getIncident);
 router.get("/incidents/:IID", getIncidentById);
 router.post("/incidents/count", getIncidentCount);
 router.post("/notifications", getNotification);
+
+router.post("/Payments/paid", getPaymentPaid);
+router.post("/Payments/unpaid", getPaymentUnpaid);
 
 router.post("/incidents", addIncident);
 router.post("/offences", addOffence);

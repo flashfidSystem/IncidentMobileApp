@@ -11,6 +11,24 @@ const getIncidentById = async (params) => {
     .execute("spIncidentIDGet");
   return result.recordsets;
 };
+const getPaymentPaid = async (params) => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool
+    .request()
+    .input("Role", sql.VarChar, params)
+    .execute("spPaidList");
+  return result.recordsets;
+};
+const getPaymentUnpaid = async (params) => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool
+    .request()
+    .input("Role", sql.VarChar, params)
+    .execute("spUnpaidList");
+  return result.recordsets;
+};
 const getIncidentCount = async () => {
   const conn = sql.connect(config.sql);
   let pool = await conn;
@@ -288,5 +306,7 @@ module.exports = {
   changePerson,
   removeIncident,
   getIncidentCount,
-  getNotification
+  getNotification,
+  getPaymentPaid,
+  getPaymentUnpaid,
 };
