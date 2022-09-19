@@ -58,13 +58,14 @@ const userUpdate = async (params) => {
   try {
     const conn = sql.connect(config.sql);
     let pool = await conn;
-    let { UserID, Fullname, Email, gender } = params;
+    let { Use1rID, Fullname, Email, gender, Photo } = params;
     let result = await pool
       .request()
       .input("UserID", sql.VarChar, UserID)
       .input("Fullname", sql.VarChar, Fullname)
       .input("Email", sql.VarChar, Email)
       .input("gender", sql.VarChar, gender)
+      .input("Photo", sql.VarChar, Photo)
       .execute("spuserUpdate");
     return result.recordsets;
   } catch (error) {
