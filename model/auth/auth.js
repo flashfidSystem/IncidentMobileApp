@@ -58,7 +58,7 @@ const userUpdate = async (params) => {
   try {
     const conn = sql.connect(config.sql);
     let pool = await conn;
-    let { Use1rID, Fullname, Email, gender, Photo } = params;
+    let { UserID, Fullname, Email, gender, Photo } = params;
     let result = await pool
       .request()
       .input("UserID", sql.VarChar, UserID)
