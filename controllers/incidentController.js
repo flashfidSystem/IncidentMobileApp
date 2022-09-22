@@ -1,5 +1,23 @@
 const incidentData = require("../model/incident/incident.js");
 
+const vehicleMake = async (req, res, next) => {
+  try {
+    const categoryCode = req.body.categoryCode;
+    const results = await incidentData.vehicleMake(categoryCode);
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
+const vehicleColor = async (req, res, next) => {
+  try {
+    const categoryCode = req.body.categoryCode;
+    const results = await incidentData.vehicleColor(categoryCode);
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
 const getIncidentById = async (req, res, next) => {
   try {
     const IID = req.params.IID;
@@ -194,5 +212,7 @@ module.exports = {
   getIncidentCount,
   getNotification,
   getPaymentPaid,
-  getPaymentUnpaid
+  getPaymentUnpaid,
+  vehicleColor,
+  vehicleMake,
 };
