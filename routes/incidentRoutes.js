@@ -19,6 +19,8 @@ const {
   getNotification,
   getPaymentPaid,
   getPaymentUnpaid,
+  vehicleMake,
+  vehicleColor,
 } = incidentController;
 
 // router.get("/incidents", getIncident);
@@ -42,7 +44,9 @@ router.put("/persons", changePerson);
 router.put("/attachments", changeAttachment);
 
 router.delete("/incidents/:IID/:ModifiedBy", removeIncident);
-// router.put("/offences", changeOffence);
+
+router.get("/vehicle/make", vehicleMake);
+router.get("/vehicle/color", vehicleColor);
 // router.put("/damages", changeDamage);
 // router.put("/persons", changePerson);
 // router.put("/attachments", changeAttachment);

@@ -2,6 +2,24 @@ const config = require("../../config");
 
 const sql = require("mssql");
 
+const vehicleMake = async (params) => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool
+    .request()
+    .input("categoryCode", sql.VarChar, params)
+    .execute("spGenericList");
+  return result.recordsets;
+};
+const vehicleColor = async (params) => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool
+    .request()
+    .input("categoryCode", sql.VarChar, params)
+    .execute("spGenericList");
+  return result.recordsets;
+};
 const getIncidentById = async (params) => {
   const conn = sql.connect(config.sql);
   let pool = await conn;
@@ -309,4 +327,6 @@ module.exports = {
   getNotification,
   getPaymentPaid,
   getPaymentUnpaid,
+  vehicleColor,
+  vehicleMake,
 };
