@@ -45,8 +45,8 @@ router.put("/attachments", changeAttachment);
 
 router.delete("/incidents/:IID/:ModifiedBy", removeIncident);
 
-router.get("/vehicle/make", vehicleMake);
-router.get("/vehicle/color", vehicleColor);
+router.post("/vehicle/make", vehicleMake);
+router.post("/vehicle/color", vehicleColor);
 // router.put("/damages", changeDamage);
 // router.put("/persons", changePerson);
 // router.put("/attachments", changeAttachment);
