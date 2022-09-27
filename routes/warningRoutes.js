@@ -15,7 +15,7 @@ router.post("/warnings", addWarning);
 router.put("/warnings", changeWarning);
 router.delete("/warnings/:Warning_Id", removeWarning);
 router.get("/warnings/:Warning_Id", getWarningById);
-router.get("/warnings", getWarnings);
+router.post("/warnings/all", getWarnings);
 
 router.delete("/warnings/car-remove", carRemoveWarning);
 
