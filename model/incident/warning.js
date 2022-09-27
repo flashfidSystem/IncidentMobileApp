@@ -25,7 +25,21 @@ const addWarning = async (params) => {
     .execute("spWarningAdd");
   return result.recordsets;
 };
-
+const getWarnings = async (params) => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool.request().execute("spWarningList");
+  return result.recordsets;
+};
+const getWarningById = async (params) => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool
+    .request()
+    .input("IID", sql.VarChar, params)
+    .execute("spWarningList");
+  return result.recordsets;
+};
 const changeWarning = async (params) => {
   const conn = sql.connect(config.sql);
   let pool = await conn;
@@ -78,4 +92,6 @@ module.exports = {
   changeWarning,
   removeWarning,
   carRemoveWarning,
+  getWarningById,
+  getWarnings,
 };

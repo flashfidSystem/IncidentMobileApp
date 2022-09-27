@@ -11,7 +11,14 @@ const addWarning = async (req, res, next) => {
     console.log(error);
   }
 };
-
+const getWarnings = async (req, res, next) => {
+  try {
+    const results = await warningData.getWarnings();
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
 const changeWarning = async (req, res, next) => {
   try {
     const params = { ...req.body };
@@ -54,4 +61,5 @@ module.exports = {
   changeWarning,
   removeWarning,
   carRemoveWarning,
+  getWarnings,
 };
