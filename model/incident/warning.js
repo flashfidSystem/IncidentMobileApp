@@ -25,7 +25,7 @@ const addWarning = async (params) => {
     .execute("spWarningAdd");
   return result.recordsets;
 };
-const getWarnings = async (params) => {
+const getWarnings = async () => {
   const conn = sql.connect(config.sql);
   let pool = await conn;
   let result = await pool.request().execute("spWarningList");
