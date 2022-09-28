@@ -59,6 +59,12 @@ const getNotification = async () => {
   let result = await pool.request().execute("spIncidentNotification");
   return result.recordsets;
 };
+const getSetupOffence = async () => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool.request().execute("spOffenceTypeList2");
+  return result.recordsets;
+};
 
 const addIncident = async (params) => {
   const conn = sql.connect(config.sql);
@@ -88,6 +94,18 @@ const addIncident = async (params) => {
     .input("CreatedBy", sql.VarChar, CreatedBy)
     .input("Cause", sql.VarChar, Cause)
     .execute("spIncidentAdd");
+  return result.recordsets;
+};
+const addSetupOffence = async (params) => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  const { setupName, penalties ,CreatedBy} = params;
+  let result = await pool
+    .request()
+    .input("setupName", sql.VarChar, setupName)
+    .input("penalties", sql.VarChar, penalties)
+    .input("CreatedBy", sql.VarChar, CreatedBy)
+    .execute("spSetUpOffenceAdd");
   return result.recordsets;
 };
 
@@ -329,4 +347,6 @@ module.exports = {
   getPaymentUnpaid,
   vehicleColor,
   vehicleMake,
+  addSetupOffence,
+  getSetupOffence,
 };

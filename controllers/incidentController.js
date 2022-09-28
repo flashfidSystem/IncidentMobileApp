@@ -61,11 +61,30 @@ const getNotification = async (req, res, next) => {
     res.status(500).json({ status: "Failed", message: error.message });
   }
 };
+const getSetupOffence = async (req, res, next) => {
+  try {
+    const results = await incidentData.getSetupOffence();
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
 
 const addIncident = async (req, res, next) => {
   try {
     const params = { ...req.body };
     const results = await incidentData.addIncident(params);
+    res.status(201).json(results);
+    console.log(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+    console.log(error);
+  }
+};
+const addSetupOffence = async (req, res, next) => {
+  try {
+    const params = { ...req.body };
+    const results = await incidentData.addSetupOffence(params);
     res.status(201).json(results);
     console.log(results);
   } catch (error) {
@@ -215,4 +234,6 @@ module.exports = {
   getPaymentUnpaid,
   vehicleColor,
   vehicleMake,
+  addSetupOffence,
+  getSetupOffence,
 };
