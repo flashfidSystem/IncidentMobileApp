@@ -84,6 +84,7 @@ const addIncident = async (req, res, next) => {
 const addSetupOffence = async (req, res, next) => {
   try {
     const params = { ...req.body };
+    console.log({ parata: params });
     const results = await incidentData.addSetupOffence(params);
     res.status(201).json(results);
     console.log(results);

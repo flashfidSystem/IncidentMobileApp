@@ -50,7 +50,7 @@ router.delete("/incidents/:IID/:ModifiedBy", removeIncident);
 router.post("/vehicle/make", vehicleMake);
 router.post("/vehicle/color", vehicleColor);
 
-router.post("/setup/offence", addSetupOffence);
+router.post("/setupoffence", addSetupOffence);
 router.get("/setup/offence", getSetupOffence);
 // router.put("/persons", changePerson);
 // router.put("/attachments", changeAttachment);

@@ -70,6 +70,8 @@ const addSetupOffence = async (params) => {
   const conn = sql.connect(config.sql);
   let pool = await conn;
   const { setupName, penalties, CreatedBy } = params;
+  console.log({ para: params });
+  console.log("hello");
   let result = await pool
     .request()
     .input("setupName", sql.VarChar, setupName)
