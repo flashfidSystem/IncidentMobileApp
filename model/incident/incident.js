@@ -99,11 +99,11 @@ const addIncident = async (params) => {
 const addSetupOffence = async (params) => {
   const conn = sql.connect(config.sql);
   let pool = await conn;
-  const { setupName, penalties ,CreatedBy} = params;
+  const { setupName, penalties, CreatedBy } = params;
   let result = await pool
     .request()
     .input("setupName", sql.VarChar, setupName)
-    .input("penalties", sql.VarChar, penalties)
+    .input("penalties", sql.Decimal, penalties)
     .input("CreatedBy", sql.VarChar, CreatedBy)
     .execute("spSetUpOffenceAdd");
   return result.recordsets;
