@@ -23,6 +23,8 @@ const {
   vehicleColor,
   addSetupOffence,
   getSetupOffence,
+  addSetup,
+  getSetup,
 } = incidentController;
 
 // router.get("/incidents", getIncident);
@@ -52,6 +54,9 @@ router.post("/vehicle/color", vehicleColor);
 
 router.post("/setupoffence", addSetupOffence);
 router.get("/setup/offence", getSetupOffence);
+
+router.post("/setup", addSetup);
+router.get("/setup", getSetup);
 // router.put("/persons", changePerson);
 // router.put("/attachments", changeAttachment);
 module.exports = {

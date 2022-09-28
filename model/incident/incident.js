@@ -66,18 +66,37 @@ const getSetupOffence = async () => {
   return result.recordsets;
 };
 
+const getSetup = async (params) => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool
+    .request()
+    .input("CC", sql.VarChar, params)
+    .execute("spRoleList2");
+  return result.recordsets;
+};
 const addSetupOffence = async (params) => {
   const conn = sql.connect(config.sql);
   let pool = await conn;
   const { setupName, penalties, CreatedBy } = params;
-  console.log({ para: params });
-  console.log("hello");
   let result = await pool
     .request()
     .input("setupName", sql.VarChar, setupName)
     .input("penalties", sql.Decimal, penalties)
     .input("CreatedBy", sql.VarChar, CreatedBy)
     .execute("spSetUpOffenceAdd");
+  return result.recordsets;
+};
+const addSetup = async (params) => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  const { setupName, categoryCode, CreatedBy } = params;
+  let result = await pool
+    .request()
+    .input("setupName", sql.VarChar, setupName)
+    .input("categoryCode", sql.VarChar, categoryCode)
+    .input("CreatedBy", sql.VarChar, CreatedBy)
+    .execute("spSetUpAdd");
   return result.recordsets;
 };
 
@@ -352,4 +371,6 @@ module.exports = {
   vehicleMake,
   addSetupOffence,
   getSetupOffence,
+  addSetup,
+  getSetup,
 };
