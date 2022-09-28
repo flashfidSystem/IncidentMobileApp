@@ -56,7 +56,7 @@ router.post("/setupoffence", addSetupOffence);
 router.get("/setup/offence", getSetupOffence);
 
 router.post("/setup", addSetup);
-router.get("/setup", getSetup);
+router.post("/setup/code", getSetup);
 // router.put("/persons", changePerson);
 // router.put("/attachments", changeAttachment);
 module.exports = {
