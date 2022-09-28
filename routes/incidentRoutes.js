@@ -21,6 +21,8 @@ const {
   getPaymentUnpaid,
   vehicleMake,
   vehicleColor,
+  addSetupOffence,
+  getSetupOffence,
 } = incidentController;
 
 // router.get("/incidents", getIncident);
@@ -47,7 +49,9 @@ router.delete("/incidents/:IID/:ModifiedBy", removeIncident);
 
 router.post("/vehicle/make", vehicleMake);
 router.post("/vehicle/color", vehicleColor);
-// router.put("/damages", changeDamage);
+
+router.post("/setup/offence", addSetupOffence);
+router.get("/setup/offence", getSetupOffence);
 // router.put("/persons", changePerson);
 // router.put("/attachments", changeAttachment);
 module.exports = {
