@@ -350,6 +350,46 @@ const removeIncident = async (params) => {
   return result.recordsets;
 };
 
+const incidentType = async () => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool.request().execute("spIncidentTypeList");
+  return result.recordsets;
+};
+const offenceType = async () => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool.request().execute("spOffenceTypeList");
+  return result.recordsets;
+};
+const investigatingOfficer = async () => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool.request().execute("spInvestigatingOfficerList");
+  return result.recordsets;
+};
+const damageType = async () => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool.request().execute("spDamagesList");
+  return result.recordsets;
+};
+const religionList = async (params) => {
+  let { categoryCode } = params;
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool
+    .request()
+    .input("categoryCode", sql.VarChar, categoryCode)
+    .execute("spGenericList");
+  return result.recordsets;
+};
+const roleList = async () => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool.request().execute("spRoleList");
+  return result.recordsets;
+};
 module.exports = {
   getIncidentById,
   addIncident,
@@ -373,4 +413,10 @@ module.exports = {
   getSetupOffence,
   addSetup,
   getSetup,
+  incidentType,
+  offenceType,
+  investigatingOfficer,
+  damageType,
+  religionList,
+  roleList,
 };
