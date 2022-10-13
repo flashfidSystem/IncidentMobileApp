@@ -31,6 +31,7 @@ const {
   damageType,
   religionList,
   roleList,
+  attachmentList,
 } = incidentController;
 
 // router.get("/incidents", getIncident);
@@ -70,6 +71,7 @@ router.post("/investigating-officer/list", investigatingOfficer);
 router.post("/damage-type/list", damageType);
 router.post("/religion/list", religionList);
 router.post("/role/list", roleList);
+router.post("/attachment/list", attachmentList);
 
 module.exports = {
   routes: router,

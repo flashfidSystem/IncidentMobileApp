@@ -390,6 +390,12 @@ const roleList = async () => {
   let result = await pool.request().execute("spRoleList");
   return result.recordsets;
 };
+const attachmentList = async () => {
+  const conn = sql.connect(config.sql);
+  let pool = await conn;
+  let result = await pool.request().execute("spAttachmentList");
+  return result.recordsets;
+};
 module.exports = {
   getIncidentById,
   addIncident,
@@ -419,4 +425,5 @@ module.exports = {
   damageType,
   religionList,
   roleList,
+  attachmentList,
 };
