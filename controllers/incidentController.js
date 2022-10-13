@@ -284,6 +284,14 @@ const roleList = async (req, res, next) => {
     res.status(500).json({ status: "Failed", message: error.message });
   }
 };
+const attachmentList = async (req, res, next) => {
+  try {
+    const results = await incidentData.attachmentList();
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
 module.exports = {
   getIncidentById,
   addIncident,
@@ -313,4 +321,5 @@ module.exports = {
   damageType,
   religionList,
   roleList,
+  attachmentList,
 };
