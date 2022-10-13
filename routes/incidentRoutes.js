@@ -25,6 +25,12 @@ const {
   getSetupOffence,
   addSetup,
   getSetup,
+  incidentType,
+  offenceType,
+  investigatingOfficer,
+  damageType,
+  religionList,
+  roleList,
 } = incidentController;
 
 // router.get("/incidents", getIncident);
@@ -57,8 +63,14 @@ router.get("/setup/offence", getSetupOffence);
 
 router.post("/setup", addSetup);
 router.post("/setup/code", getSetup);
-// router.put("/persons", changePerson);
-// router.put("/attachments", changeAttachment);
+
+router.post("/incident-type/list", incidentType);
+router.post("/offence-type/list", offenceType);
+router.post("/investigating-officer/list", investigatingOfficer);
+router.post("/damage-type/list", damageType);
+router.post("/religion/list", religionList);
+router.post("/role/list", roleList);
+
 module.exports = {
   routes: router,
 };

@@ -92,7 +92,7 @@ const addIncident = async (req, res, next) => {
 };
 const addSetupOffence = async (req, res, next) => {
   try {
-    const params = { ...req.body }; 
+    const params = { ...req.body };
     const results = await incidentData.addSetupOffence(params);
     res.status(201).json(results);
     console.log(results);
@@ -100,10 +100,10 @@ const addSetupOffence = async (req, res, next) => {
     res.status(500).json({ status: "Failed", message: error.message });
     console.log(error);
   }
-}; 
+};
 const addSetup = async (req, res, next) => {
   try {
-    const params = { ...req.body }; 
+    const params = { ...req.body };
     const results = await incidentData.addSetup(params);
     res.status(201).json(results);
     console.log(results);
@@ -235,6 +235,55 @@ const removeIncident = async (req, res, next) => {
   }
 };
 
+const incidentType = async (req, res, next) => {
+  try {
+    const results = await incidentData.incidentType();
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
+const offenceType = async (req, res, next) => {
+  try {
+    const results = await incidentData.offenceType();
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
+const investigatingOfficer = async (req, res, next) => {
+  try {
+    const results = await incidentData.investigatingOfficer();
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
+const damageType = async (req, res, next) => {
+  try {
+    const results = await incidentData.damageType();
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
+const religionList = async (req, res, next) => {
+  try {
+    const params = { ...req.body };
+    const results = await incidentData.religionList(params);
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
+const roleList = async (req, res, next) => {
+  try {
+    const results = await incidentData.roleList();
+    res.status(200).json(results);
+  } catch (error) {
+    res.status(500).json({ status: "Failed", message: error.message });
+  }
+};
 module.exports = {
   getIncidentById,
   addIncident,
@@ -258,4 +307,10 @@ module.exports = {
   getSetupOffence,
   addSetup,
   getSetup,
+  incidentType,
+  offenceType,
+  investigatingOfficer,
+  damageType,
+  religionList,
+  roleList,
 };
