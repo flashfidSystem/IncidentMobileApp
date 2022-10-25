@@ -100,6 +100,180 @@ const addSetup = async (params) => {
   return result.recordsets;
 };
 
+const addIncidentSave = async (params) => {
+  const { Incidentdata, OffenceData, DamageData, Persondata, AttachmentData } =
+    params;
+
+  const data = Incidentdata[0];
+  const IIDVAL = data.IID;
+  console.log(IIDVAL);
+
+  const offenceTable = new sql.Table("TBL_Offence");
+  offenceTable.create = false;
+  offenceTable.columns.add("Offence_Type", sql.NVarChar(80), {
+    nullable: false,
+  });
+  offenceTable.columns.add("Offence_Details", sql.NVarChar(80), {
+    nullable: true,
+  });
+  offenceTable.columns.add("Offence_Cost", sql.Decimal(18, 2), {
+    nullable: true,
+  });
+  offenceTable.columns.add("IID", sql.NVarChar(50), {
+    nullable: true,
+  });
+  OffenceData.forEach(function (row) {
+    offenceTable.rows.add(
+      row.Offence_Type,
+      row.Offence_Details,
+      row.Offence_Cost,
+      IIDVAL
+    );
+  });
+
+  const damagesTable = new sql.Table("Tbl_Damages");
+  damagesTable.create = false;
+  damagesTable.columns.add("Damages_Category", sql.NVarChar(50), {
+    nullable: true,
+  });
+  damagesTable.columns.add("Damages_Cost", sql.Decimal(18, 2), {
+    nullable: true,
+  });
+  damagesTable.columns.add("Damages_Details", sql.NVarChar(100), {
+    nullable: true,
+  });
+  damagesTable.columns.add("IID", sql.NVarChar(50), { nullable: true });
+  DamageData.forEach((row) =>
+    damagesTable.rows.add(
+      row.Damages_Category,
+      row.Damages_Cost,
+      row.Damages_Details,
+      IIDVAL
+    )
+  );
+
+  const attachmentTable = new sql.Table("TBL_Attachment");
+  attachmentTable.create = false;
+  attachmentTable.columns.add("Attachment_Category", sql.VarChar(50), {
+    nullable: true,
+  });
+  attachmentTable.columns.add("Name", sql.VarChar(sql.MAX), {
+    nullable: true,
+  });
+  attachmentTable.columns.add("ContentType", sql.NVarChar(200), {
+    nullable: true,
+  });
+  attachmentTable.columns.add("IID", sql.NVarChar(50), { nullable: true });
+  AttachmentData.forEach((row) =>
+    attachmentTable.rows.add(
+      row.Attachment_Category,
+      row.Name,
+      row.ContentType,
+      IIDVAL
+    )
+  );
+  const personTable = new sql.Table("Tbl_Person");
+  personTable.create = false;
+  personTable.columns.add("FullName", sql.VarChar(60), { nullable: true });
+  personTable.columns.add("Gender", sql.VarChar(30), { nullable: true });
+  personTable.columns.add("Religion", sql.NVarChar(30), { nullable: true });
+  personTable.columns.add("Phone_Number", sql.NVarChar(15), {
+    nullable: true,
+  });
+  personTable.columns.add("Age", sql.Int, { nullable: true });
+  personTable.columns.add("Role", sql.NVarChar(40), { nullable: true });
+  personTable.columns.add("Nationality", sql.NVarChar(40), {
+    nullable: true,
+  });
+  personTable.columns.add("Occupation", sql.NVarChar(60), { nullable: true });
+  personTable.columns.add("State_Tribe", sql.NVarChar(60), {
+    nullable: true,
+  });
+  personTable.columns.add("Matric_No", sql.NVarChar(50), { nullable: true });
+  personTable.columns.add("Dept_Faculty", sql.NVarChar(50), {
+    nullable: true,
+  });
+  personTable.columns.add("Dept_Unit", sql.NVarChar(50), { nullable: true });
+  personTable.columns.add("Address", sql.NVarChar(150), { nullable: true });
+  personTable.columns.add("Description", sql.NVarChar(200), {
+    nullable: true,
+  });
+  personTable.columns.add("IID", sql.NVarChar(50), { nullable: true });
+  personTable.columns.add("Vehicle_Make", sql.NVarChar(50), {
+    nullable: true,
+  });
+  personTable.columns.add("Vehicle_Color", sql.NVarChar(50), {
+    nullable: true,
+  });
+  personTable.columns.add("Vehicle_No", sql.NVarChar(40), { nullable: true });
+  Persondata.forEach((row) =>
+    personTable.rows.add(
+      row.FullName,
+      row.Gender,
+      row.Religion,
+      row.Phone_Number,
+      row.Age,
+      row.Role,
+      row.Nationality,
+      row.Occupation,
+      row.State_Tribe,
+      row.Matric_No,
+      row.Dept_Faculty,
+      row.Dept_Unit,
+      row.Address,
+      row.Description,
+      IIDVAL,
+      row.Vehicle_Make,
+      row.Vehicle_Color,
+      row.Vehicle_No
+    )
+  );
+
+  let pool = await sql.connect(config.sql);
+  let result = await pool
+    .request()
+    .input("IID", sql.VarChar, IIDVAL)
+    .input("Incidence_Type", sql.VarChar, data.Incidence_Type)
+    .input("Date_Time", sql.DateTime, data.Date_Time)
+    .input("Location", sql.VarChar, data.Location)
+    .input("Investigating_Officer", sql.VarChar, data.Investigating_Officer)
+    .input("Action_Taken", sql.VarChar, data.Action_Taken)
+    .input("Investigation", sql.VarChar, data.Investigation)
+    .input("Observation", sql.VarChar, data.Observation)
+    .input("Incidence_Remark", sql.VarChar, data.Incidence_Remark)
+    .input("CreatedBy", sql.VarChar, data.CreatedBy)
+    .input("Cause", sql.VarChar, data.Cause)
+    .bulk(offenceTable, (err, result) => {
+      if (err) {
+        console.log("bulk insert error");
+        console.log(err);
+        return;
+      }
+    })
+    .bulk(damagesTable, (err, result) => {
+      if (err) {
+        console.log("bulk insert error");
+        console.log(err);
+        return;
+      }
+    })
+    .bulk(personTable, (err, result) => {
+      if (err) {
+        console.log("bulk insert error");
+        console.log(err);
+        return;
+      }
+    })
+    .bulk(attachmentTable, (err, result) => {
+      if (err) {
+        console.log("bulk insert error");
+        console.log(err);
+        return;
+      }
+    })
+    .execute("spSaveIncidence");
+  return result;
+};
 const addIncident = async (params) => {
   const conn = sql.connect(config.sql);
   let pool = await conn;
@@ -117,6 +291,7 @@ const addIncident = async (params) => {
   } = params;
   let result = await pool
     .request()
+    .input("IID", sql.VarChar, Incidence_Type)
     .input("Incidence_Type", sql.VarChar, Incidence_Type)
     .input("Date_Time", sql.DateTime, Date_Time)
     .input("Location", sql.VarChar, Location)
@@ -426,4 +601,5 @@ module.exports = {
   religionList,
   roleList,
   attachmentList,
+  addIncidentSave,
 };

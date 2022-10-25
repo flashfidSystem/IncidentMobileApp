@@ -32,6 +32,7 @@ const {
   religionList,
   roleList,
   attachmentList,
+  addIncidentSave,
 } = incidentController;
 
 // router.get("/incidents", getIncident);
@@ -43,6 +44,7 @@ router.post("/Payments/paid", getPaymentPaid);
 router.post("/Payments/unpaid", getPaymentUnpaid);
 
 router.post("/incidents", addIncident);
+router.post("/incidents/save", addIncidentSave);
 router.post("/offences", addOffence);
 router.post("/damages", addDamage);
 router.post("/persons", addPerson);
