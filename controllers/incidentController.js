@@ -79,6 +79,17 @@ const getSetup = async (req, res, next) => {
   }
 };
 
+const addIncidentSave = async (req, res, next) => {
+  try {
+    const params = { ...req.body };
+    const results = await incidentData.addIncidentSave(params);
+    res.status(201).json(results);
+    console.log(results);
+  } catch (error) {
+    res.status(500).json(error);
+    console.log(error);
+  }
+};
 const addIncident = async (req, res, next) => {
   try {
     const params = { ...req.body };
@@ -322,4 +333,5 @@ module.exports = {
   religionList,
   roleList,
   attachmentList,
+  addIncidentSave,
 };
